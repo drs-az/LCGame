@@ -97,7 +97,7 @@
     }
   </style>
 
-  <!-- Dynamically create and inject the manifest with AngyDiggy.png as the icon -->
+  <!-- Manifest using AngyDiggy.png as the PWA icon -->
   <script>
     const manifest = {
       "short_name": "LCGame",
@@ -123,7 +123,7 @@
     document.head.appendChild(manifestLink);
   </script>
 
-  <!-- Create and register the service worker from inline code -->
+  <!-- Service worker registration -->
   <script>
     const swCode = `
       const CACHE_NAME = 'lcgame-cache-v1';
@@ -190,9 +190,9 @@
   <script>
     // Global game variables
     let score = 0;
-    let timeLeft = 60; // Game duration in seconds
+    let timeLeft = 60; // seconds
     let level = 1;
-    const levelThreshold = 10; // Increase level every 10 points
+    const levelThreshold = 10;
     let targetType = "red"; // "red" or "angy"
     let autoTimeoutId; // Timer for auto-hiding the target
     let gameTimer;      // Interval for game timer
@@ -212,7 +212,7 @@
     const gameOverMessage = document.getElementById('gameOverMessage');
     const finalScoreDisplay = document.getElementById('finalScore');
 
-    // Helper: Position target randomly within the game container
+    // Position the target randomly within the game container
     function positionElement(element) {
       const containerWidth = gameContainer.clientWidth;
       const containerHeight = gameContainer.clientHeight;
@@ -223,8 +223,7 @@
       element.style.top = Math.floor(Math.random() * maxTop) + 'px';
     }
 
-    // Function to randomly choose target type, update its style, position it,
-    // and start the auto-hide timer based on the selected difficulty
+    // Randomly choose the target type, style it, position it, and auto-hide after autoHideTime
     function moveTarget() {
       if (autoTimeoutId) clearTimeout(autoTimeoutId);
       target.style.display = "block";
@@ -247,7 +246,22 @@
       }, autoHideTime);
     }
 
-    // Update level if necessary (for every levelThreshold points)
+    // When the target is clicked, update the score accordingly, then reset the target
+    target.addEventListener('click', () => {
+      if (timeLeft > 0) {
+        if (autoTimeoutId) clearTimeout(autoTimeoutId);
+        if (targetType === "angy") {
+          score++;
+        } else {
+          score--;
+        }
+        scoreBoard.textContent = 'Score: ' + score;
+        updateLevel();
+        moveTarget();
+      }
+    });
+
+    // Update level based on score
     function updateLevel() {
       const newLevel = Math.floor(score / levelThreshold) + 1;
       if (newLevel !== level) {
@@ -256,7 +270,7 @@
       }
     }
 
-    // Update the game timer; end game when time runs out
+    // Update the timer each second and end the game when time runs out
     function updateTimer() {
       timeLeft--;
       timerDisplay.textContent = 'Time: ' + timeLeft + 's';
@@ -266,7 +280,7 @@
       }
     }
 
-    // End the game and display final score
+    // End the game and display the final score
     function endGame() {
       target.style.display = 'none';
       gameOverMessage.style.display = 'block';
@@ -287,7 +301,7 @@
       gameTimer = setInterval(updateTimer, 1000);
     }
 
-    // Event listeners for start game button and difficulty selection
+    // Event listeners for starting the game and selecting difficulty
     startGameBtn.addEventListener('click', () => {
       difficultyModal.style.display = "flex";
     });
