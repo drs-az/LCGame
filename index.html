@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- Set theme color -->
   <meta name="theme-color" content="#74ebd5" />
-  <title>Lucas and Caleb's Progressive Game!</title>
+  <title>Whack Angy Diggy</title>
   <style>
     body {
       margin: 0;
@@ -37,11 +37,11 @@
       overflow: hidden;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
-    /* Default styling for the target element (red circle style) */
+    /* Enlarged target styling: 100px by 100px */
     #target {
       position: absolute;
-      width: 50px;
-      height: 50px;
+      width: 100px;
+      height: 100px;
       background-color: #FF6F61;
       border-radius: 50%;
       cursor: pointer;
@@ -63,15 +63,15 @@
   <script>
     const manifest = {
       "short_name": "LCGame",
-      "name": "Lucas and Caleb's Progressive Game",
+      "name": "Whack Angy Diggy",
       "icons": [
         {
-          "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAI7SURBVHhe7d0xDsJgEATB9Z///E4iqJkyfUMPSB6VwTXOv+xDV6jrn+L5rwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAw8I/wPheZPNC8k2wAAAABJRU5ErkJggg==",
+          "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAI7SURBVHhe7d0xDsJgEATB9Z///E4iqJkyfUMPSB6VwTXOv+xDV6jrn+L5rwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAw8I/wPheZPNC8k2wAAAABJRU5ErkJggg==",
           "sizes": "192x192",
           "type": "image/png"
         },
         {
-          "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAI7SURBVHhe7d0xDsJgEATB9Z///E4iqJkyfUMPSB6VwTXOv+xDV6jrn+L5rwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAw8I/wPheZPNC8k2wAAAABJRU5ErkJggg==",
+          "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAI7SURBVHhe7d0xDsJgEATB9Z///E4iqJkyfUMPSB6VwTXOv+xDV6jrn+L5rwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAw8I/wPheZPNC8k2wAAAABJRU5ErkJggg==",
           "sizes": "512x512",
           "type": "image/png"
         }
@@ -123,10 +123,10 @@
   </script>
 </head>
 <body>
-  <h1>Lucas and Caleb's Progressive Game!</h1>
+  <h1>Whack Angy Diggy</h1>
   <div id="scoreBoard">Score: 0</div>
   <div id="levelDisplay">Level: 1</div>
-  <div id="timer">Time: 30s</div>
+  <div id="timer">Time: 60s</div>
   <div id="gameContainer">
     <div id="target"></div>
     <div id="gameOverMessage">
@@ -138,11 +138,12 @@
   <script>
     // Game variables
     let score = 0;
-    let timeLeft = 30; // seconds
+    let timeLeft = 60; // Game duration in seconds (1 minute)
     let level = 1;
     const levelThreshold = 10; // Increase level every 10 points
     let targetType = "red"; // "red" or "angy"
-    
+    let autoTimeoutId; // Used for auto-hiding the target
+
     const target = document.getElementById('target');
     const scoreBoard = document.getElementById('scoreBoard');
     const levelDisplay = document.getElementById('levelDisplay');
@@ -150,8 +151,8 @@
     const gameContainer = document.getElementById('gameContainer');
     const gameOverMessage = document.getElementById('gameOverMessage');
     const finalScoreDisplay = document.getElementById('finalScore');
-    
-    // Randomly position the element within the game container
+
+    // Position the target within the container boundaries
     function positionElement(element) {
       const containerWidth = gameContainer.clientWidth;
       const containerHeight = gameContainer.clientHeight;
@@ -161,26 +162,35 @@
       element.style.left = Math.floor(Math.random() * maxLeft) + 'px';
       element.style.top = Math.floor(Math.random() * maxTop) + 'px';
     }
-    
-    // Randomly choose the target type and update its style, then reposition it
+
+    // Randomly choose the target type, update its style, and start the auto-hide timer
     function moveTarget() {
+      // Clear any previous auto-hide timer
+      if (autoTimeoutId) clearTimeout(autoTimeoutId);
+      // Ensure the target is visible
+      target.style.display = "block";
+      // Randomly choose target type: red circle (penalty) or AngyDiggy image (reward)
       if (Math.random() < 0.5) {
-        // Set target as red circle (penalty)
         targetType = "red";
         target.style.backgroundColor = "#FF6F61";
         target.style.backgroundImage = "";
         target.style.borderRadius = "50%";
       } else {
-        // Set target as AngyDiggy.png (reward)
         targetType = "angy";
         target.style.backgroundImage = "url('AngyDiggy.png')";
         target.style.backgroundSize = "cover";
         target.style.backgroundColor = "transparent";
         target.style.borderRadius = "0";
       }
+      // Position the target randomly
       positionElement(target);
+      // Auto-hide the target after 2 seconds and reset
+      autoTimeoutId = setTimeout(() => {
+        target.style.display = "none";
+        moveTarget();
+      }, 2000);
     }
-    
+
     function updateLevel() {
       const newLevel = Math.floor(score / levelThreshold) + 1;
       if (newLevel !== level) {
@@ -188,7 +198,7 @@
         levelDisplay.textContent = 'Level: ' + level;
       }
     }
-    
+
     function updateTimer() {
       timeLeft--;
       timerDisplay.textContent = 'Time: ' + timeLeft + 's';
@@ -197,16 +207,17 @@
         endGame();
       }
     }
-    
+
     function endGame() {
       target.style.display = 'none';
       gameOverMessage.style.display = 'block';
       finalScoreDisplay.textContent = score;
     }
-    
-    // When the target is clicked, update the score based on its type
+
+    // When the target is clicked, cancel the auto-hide timer, update the score based on its type, and reset the target
     target.addEventListener('click', () => {
       if (timeLeft > 0) {
+        if (autoTimeoutId) clearTimeout(autoTimeoutId);
         if (targetType === "angy") {
           score++;
         } else { // red circle
@@ -217,7 +228,7 @@
         moveTarget();
       }
     });
-    
+
     // Start the game
     moveTarget();
     const gameTimer = setInterval(updateTimer, 1000);
