@@ -18,7 +18,7 @@
       justify-content: center;
       min-height: 100vh;
       box-sizing: border-box;
-      padding: 20px; /* some padding for mobile devices */
+      padding: 20px; /* Extra room on mobile */
     }
     h1 {
       color: #333;
@@ -29,11 +29,11 @@
       margin: 10px;
       color: #333;
     }
-    /* Responsive game container: 90% width with max-width 600px and 3:2 ratio */
+    /* Responsive game container: 90% width with max-width 800px and 3:2 ratio */
     #gameContainer {
       position: relative;
       width: 90%;
-      max-width: 600px;
+      max-width: 800px;
       aspect-ratio: 3 / 2;
       background-color: #fff;
       border: 3px solid #333;
@@ -107,12 +107,12 @@
       "name": "Whack Angy Diggy",
       "icons": [
         {
-          "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAI7SURBVHhe7d0xDsJgEATB9Z///E4iqJkyfUMPSB6VwTXOv+xDV6jrn+L5rwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAw8I/wPheZPNC8k2wAAAABJRU5ErkJggg==",
+          "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAI7SURBVHhe7d0xDsJgEATB9Z///E4iqJkyfUMPSB6VwTXOv+xDV6jrn+L5rwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAw8I/wPheZPNC8k2wAAAABJRU5ErkJggg==",
           "sizes": "192x192",
           "type": "image/png"
         },
         {
-          "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAI7SURBVHhe7d0xDsJgEATB9Z///E4iqJkyfUMPSB6VwTXOv+xDV6jrn+L5rwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAw8I/wPheZPNC8k2wAAAABJRU5ErkJggg==",
+          "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAI7SURBVHhe7d0xDsJgEATB9Z///E4iqJkyfUMPSB6VwTXOv+xDV6jrn+L5rwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAw8I/wPheZPNC8k2wAAAABJRU5ErkJggg==",
           "sizes": "512x512",
           "type": "image/png"
         }
