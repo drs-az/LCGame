@@ -17,8 +17,6 @@
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      box-sizing: border-box;
-      padding: 20px; /* Extra room on mobile */
     }
     h1 {
       color: #333;
@@ -29,12 +27,11 @@
       margin: 10px;
       color: #333;
     }
-    /* Responsive game container: 90% width with max-width 800px and 3:2 ratio */
+    /* Fixed game container: 800px x 600px */
     #gameContainer {
       position: relative;
-      width: 90%;
-      max-width: 800px;
-      aspect-ratio: 3 / 2;
+      width: 800px;
+      height: 600px;
       background-color: #fff;
       border: 3px solid #333;
       border-radius: 15px;
@@ -42,7 +39,7 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
       margin: 20px 0;
     }
-    /* Enlarged target styling: 100px by 100px */
+    /* Target styling: 100px by 100px */
     #target {
       position: absolute;
       width: 100px;
@@ -100,19 +97,14 @@
     }
   </style>
 
-  <!-- Dynamically create and inject the manifest -->
+  <!-- Dynamically create and inject the manifest with AngyDiggy.png as the icon -->
   <script>
     const manifest = {
       "short_name": "LCGame",
       "name": "Whack Angy Diggy",
       "icons": [
         {
-          "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAI7SURBVHhe7d0xDsJgEATB9Z///E4iqJkyfUMPSB6VwTXOv+xDV6jrn+L5rwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAw8I/wPheZPNC8k2wAAAABJRU5ErkJggg==",
-          "sizes": "192x192",
-          "type": "image/png"
-        },
-        {
-          "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAI7SURBVHhe7d0xDsJgEATB9Z///E4iqJkyfUMPSB6VwTXOv+xDV6jrn+L5rwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAw8I/wPheZPNC8k2wAAAABJRU5ErkJggg==",
+          "src": "AngyDiggy.png",
           "sizes": "512x512",
           "type": "image/png"
         }
@@ -189,7 +181,7 @@
     <div id="gameContainer">
       <div id="target"></div>
       <div id="gameOverMessage">
-        Game Over!<br />
+        Game Over!<br>
         Your score: <span id="finalScore"></span>
       </div>
     </div>
@@ -198,7 +190,7 @@
   <script>
     // Global game variables
     let score = 0;
-    let timeLeft = 60; // Game duration (seconds)
+    let timeLeft = 60; // Game duration in seconds
     let level = 1;
     const levelThreshold = 10; // Increase level every 10 points
     let targetType = "red"; // "red" or "angy"
