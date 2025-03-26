@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- iOS PWA meta tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="apple-touch-icon" href="AngyDiggy.png" />
   <!-- Set theme color -->
   <meta name="theme-color" content="#74ebd5" />
   <title>Whack Angy Diggy</title>
@@ -23,8 +27,8 @@
       margin-bottom: 10px;
     }
     #scoreBoard, #levelDisplay, #timer {
-      font-size: 20px;
-      margin: 5px;
+      font-size: 24px;
+      margin: 10px;
       color: #333;
     }
     /* Fixed game container: 800px x 600px */
@@ -157,7 +161,7 @@
 </head>
 <body>
   <h1>Whack Angy Diggy</h1>
-  <p>Made with 💖 for Lucas and Caleb</p>
+
   <!-- Start Screen -->
   <div id="startScreen">
     <button id="startGameBtn">Start Game</button>
@@ -251,7 +255,7 @@
       }, autoHideTime);
     }
 
-    // When the target is clicked, update the score and reset the target
+    // When the target is clicked, update the score accordingly, then reset the target
     target.addEventListener('click', () => {
       if (timeLeft > 0 && gameActive) {
         if (autoTimeoutId) clearTimeout(autoTimeoutId);
