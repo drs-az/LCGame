@@ -6,7 +6,6 @@
   <!-- Set theme color -->
   <meta name="theme-color" content="#74ebd5" />
   <title>Lucas and Caleb's Progressive Game!</title>
-  <!-- Inline CSS for game styling -->
   <style>
     body {
       margin: 0;
@@ -38,6 +37,7 @@
       overflow: hidden;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
+    /* Default styling for the target element (red circle style) */
     #target {
       position: absolute;
       width: 50px;
@@ -46,16 +46,6 @@
       border-radius: 50%;
       cursor: pointer;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-    }
-    #bonusTarget {
-      position: absolute;
-      width: 40px;
-      height: 40px;
-      background-color: #FFD700;
-      border-radius: 50%;
-      cursor: pointer;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-      display: none;
     }
     #gameOverMessage {
       display: none;
@@ -76,12 +66,12 @@
       "name": "Lucas and Caleb's Progressive Game",
       "icons": [
         {
-          "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAI7SURBVHhe7d0xDsJgEATB9Z///E4iqJkyfUMPSB6VwTXOv+xDV6jrn+L5rwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAw8I/wPheZPNC8k2wAAAABJRU5ErkJggg==",
+          "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAI7SURBVHhe7d0xDsJgEATB9Z///E4iqJkyfUMPSB6VwTXOv+xDV6jrn+L5rwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAw8I/wPheZPNC8k2wAAAABJRU5ErkJggg==",
           "sizes": "192x192",
           "type": "image/png"
         },
         {
-          "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAI7SURBVHhe7d0xDsJgEATB9Z///E4iqJkyfUMPSB6VwTXOv+xDV6jrn+L5rwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAw8I/wPheZPNC8k2wAAAABJRU5ErkJggg==",
+          "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAI7SURBVHhe7d0xDsJgEATB9Z///E4iqJkyfUMPSB6VwTXOv+xDV6jrn+L5rwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAw8I/wPheZPNC8k2wAAAABJRU5ErkJggg==",
           "sizes": "512x512",
           "type": "image/png"
         }
@@ -100,11 +90,11 @@
     document.head.appendChild(manifestLink);
   </script>
 
-  <!-- Create and register service worker from inline code -->
+  <!-- Create and register the service worker from inline code -->
   <script>
     const swCode = `
       const CACHE_NAME = 'lcgame-cache-v1';
-      const assetsToCache = ['./', './index.html'];
+      const assetsToCache = ['./', './index.html', './AngyDiggy.png'];
       self.addEventListener('install', event => {
         event.waitUntil(
           caches.open(CACHE_NAME).then(cache => cache.addAll(assetsToCache))
@@ -139,28 +129,29 @@
   <div id="timer">Time: 30s</div>
   <div id="gameContainer">
     <div id="target"></div>
-    <div id="bonusTarget"></div>
     <div id="gameOverMessage">
       Game Over!<br />
       Your score: <span id="finalScore"></span>
     </div>
   </div>
 
-  <!-- Game logic -->
   <script>
+    // Game variables
     let score = 0;
     let timeLeft = 30; // seconds
     let level = 1;
-    const levelThreshold = 10;
-    const normalTarget = document.getElementById('target');
-    const bonusTarget = document.getElementById('bonusTarget');
+    const levelThreshold = 10; // Increase level every 10 points
+    let targetType = "red"; // "red" or "angy"
+    
+    const target = document.getElementById('target');
     const scoreBoard = document.getElementById('scoreBoard');
     const levelDisplay = document.getElementById('levelDisplay');
     const timerDisplay = document.getElementById('timer');
     const gameContainer = document.getElementById('gameContainer');
     const gameOverMessage = document.getElementById('gameOverMessage');
     const finalScoreDisplay = document.getElementById('finalScore');
-
+    
+    // Randomly position the element within the game container
     function positionElement(element) {
       const containerWidth = gameContainer.clientWidth;
       const containerHeight = gameContainer.clientHeight;
@@ -170,19 +161,26 @@
       element.style.left = Math.floor(Math.random() * maxLeft) + 'px';
       element.style.top = Math.floor(Math.random() * maxTop) + 'px';
     }
-
+    
+    // Randomly choose the target type and update its style, then reposition it
     function moveTarget() {
-      positionElement(normalTarget);
-    }
-
-    function spawnBonusTarget() {
-      if (bonusTarget.style.display === 'none' && Math.random() < 0.5) {
-        positionElement(bonusTarget);
-        bonusTarget.style.display = 'block';
-        setTimeout(() => { bonusTarget.style.display = 'none'; }, 3000);
+      if (Math.random() < 0.5) {
+        // Set target as red circle (penalty)
+        targetType = "red";
+        target.style.backgroundColor = "#FF6F61";
+        target.style.backgroundImage = "";
+        target.style.borderRadius = "50%";
+      } else {
+        // Set target as AngyDiggy.png (reward)
+        targetType = "angy";
+        target.style.backgroundImage = "url('AngyDiggy.png')";
+        target.style.backgroundSize = "cover";
+        target.style.backgroundColor = "transparent";
+        target.style.borderRadius = "0";
       }
+      positionElement(target);
     }
-
+    
     function updateLevel() {
       const newLevel = Math.floor(score / levelThreshold) + 1;
       if (newLevel !== level) {
@@ -190,47 +188,39 @@
         levelDisplay.textContent = 'Level: ' + level;
       }
     }
-
+    
     function updateTimer() {
       timeLeft--;
       timerDisplay.textContent = 'Time: ' + timeLeft + 's';
       if (timeLeft <= 0) {
         clearInterval(gameTimer);
-        clearInterval(bonusSpawner);
         endGame();
       }
     }
-
+    
     function endGame() {
-      normalTarget.style.display = 'none';
-      bonusTarget.style.display = 'none';
+      target.style.display = 'none';
       gameOverMessage.style.display = 'block';
       finalScoreDisplay.textContent = score;
     }
-
-    normalTarget.addEventListener('click', () => {
+    
+    // When the target is clicked, update the score based on its type
+    target.addEventListener('click', () => {
       if (timeLeft > 0) {
-        score++;
+        if (targetType === "angy") {
+          score++;
+        } else { // red circle
+          score--;
+        }
         scoreBoard.textContent = 'Score: ' + score;
         updateLevel();
         moveTarget();
       }
     });
-
-    bonusTarget.addEventListener('click', () => {
-      if (timeLeft > 0) {
-        score += 5;
-        timeLeft += 3;
-        scoreBoard.textContent = 'Score: ' + score;
-        timerDisplay.textContent = 'Time: ' + timeLeft + 's';
-        updateLevel();
-        bonusTarget.style.display = 'none';
-      }
-    });
-
+    
+    // Start the game
     moveTarget();
     const gameTimer = setInterval(updateTimer, 1000);
-    const bonusSpawner = setInterval(spawnBonusTarget, 5000);
   </script>
 </body>
 </html>
