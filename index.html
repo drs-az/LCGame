@@ -157,7 +157,7 @@
 </head>
 <body>
   <h1>Whack Angy Diggy</h1>
-
+  <p>Made with 💖 for Lucas and Caleb</p>
   <!-- Start Screen -->
   <div id="startScreen">
     <button id="startGameBtn">Start Game</button>
@@ -197,6 +197,7 @@
     let autoTimeoutId; // Timer for auto-hiding the target
     let gameTimer;      // Interval for game timer
     let autoHideTime = 500; // Default auto-hide time (ms); will be set based on difficulty
+    let gameActive = false; // Flag to indicate if the game is running
 
     // DOM elements
     const startScreen = document.getElementById('startScreen');
@@ -212,7 +213,7 @@
     const gameOverMessage = document.getElementById('gameOverMessage');
     const finalScoreDisplay = document.getElementById('finalScore');
 
-    // Position the target randomly within the game container
+    // Helper: Position target randomly within the game container
     function positionElement(element) {
       const containerWidth = gameContainer.clientWidth;
       const containerHeight = gameContainer.clientHeight;
@@ -223,8 +224,10 @@
       element.style.top = Math.floor(Math.random() * maxTop) + 'px';
     }
 
-    // Randomly choose the target type, style it, position it, and auto-hide after autoHideTime
+    // Function to randomly choose target type, style it, position it,
+    // and auto-hide it after autoHideTime (only if the game is active)
     function moveTarget() {
+      if (!gameActive) return; // Stop if game is not active
       if (autoTimeoutId) clearTimeout(autoTimeoutId);
       target.style.display = "block";
       if (Math.random() < 0.5) {
@@ -242,13 +245,15 @@
       positionElement(target);
       autoTimeoutId = setTimeout(() => {
         target.style.display = "none";
-        moveTarget();
+        if (gameActive) {
+          moveTarget();
+        }
       }, autoHideTime);
     }
 
-    // When the target is clicked, update the score accordingly, then reset the target
+    // When the target is clicked, update the score and reset the target
     target.addEventListener('click', () => {
-      if (timeLeft > 0) {
+      if (timeLeft > 0 && gameActive) {
         if (autoTimeoutId) clearTimeout(autoTimeoutId);
         if (targetType === "angy") {
           score++;
@@ -270,7 +275,7 @@
       }
     }
 
-    // Update the timer each second and end the game when time runs out
+    // Update the game timer; end game when time runs out
     function updateTimer() {
       timeLeft--;
       timerDisplay.textContent = 'Time: ' + timeLeft + 's';
@@ -280,18 +285,21 @@
       }
     }
 
-    // End the game and display the final score
+    // End the game: cancel timers, set gameActive to false, and show final score
     function endGame() {
+      gameActive = false;
+      if (autoTimeoutId) clearTimeout(autoTimeoutId);
       target.style.display = 'none';
       gameOverMessage.style.display = 'block';
       finalScoreDisplay.textContent = score;
     }
 
-    // Start the game: reset values, hide start/difficulty screens, and begin timer
+    // Start the game: reset values, hide start/difficulty screens, and begin timers
     function startGame() {
       score = 0;
       timeLeft = 60;
       level = 1;
+      gameActive = true;
       scoreBoard.textContent = 'Score: ' + score;
       levelDisplay.textContent = 'Level: ' + level;
       timerDisplay.textContent = 'Time: ' + timeLeft + 's';
