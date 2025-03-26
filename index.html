@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Set theme color -->
+  <meta name="theme-color" content="#74ebd5" />
+  <title>Lucas and Caleb's Progressive Game!</title>
+  <!-- Inline CSS for game styling -->
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(to right, #74ebd5, #ACB6E5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+    #scoreBoard, #levelDisplay, #timer {
+      font-size: 24px;
+      margin: 10px;
+      color: #333;
+    }
+    #gameContainer {
+      position: relative;
+      width: 600px;
+      height: 400px;
+      background-color: #fff;
+      border: 3px solid #333;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+    #target {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-color: #FF6F61;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
+    #bonusTarget {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background-color: #FFD700;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      display: none;
+    }
+    #gameOverMessage {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 36px;
+      color: #FF6F61;
+      text-align: center;
+    }
+  </style>
+
+  <!-- Dynamically create and inject the manifest -->
+  <script>
+    const manifest = {
+      "short_name": "LCGame",
+      "name": "Lucas and Caleb's Progressive Game",
+      "icons": [
+        {
+          "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAI7SURBVHhe7d0xDsJgEATB9Z///E4iqJkyfUMPSB6VwTXOv+xDV6jrn+L5rwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAw8I/wPheZPNC8k2wAAAABJRU5ErkJggg==",
+          "sizes": "192x192",
+          "type": "image/png"
+        },
+        {
+          "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAI7SURBVHhe7d0xDsJgEATB9Z///E4iqJkyfUMPSB6VwTXOv+xDV6jrn+L5rwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAwcHAw8I/wPheZPNC8k2wAAAABJRU5ErkJggg==",
+          "sizes": "512x512",
+          "type": "image/png"
+        }
+      ],
+      "start_url": ".",
+      "background_color": "#ffffff",
+      "display": "standalone",
+      "scope": ".",
+      "theme_color": "#74ebd5"
+    };
+    const manifestBlob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+    const manifestURL = URL.createObjectURL(manifestBlob);
+    const manifestLink = document.createElement('link');
+    manifestLink.rel = 'manifest';
+    manifestLink.href = manifestURL;
+    document.head.appendChild(manifestLink);
+  </script>
+
+  <!-- Create and register service worker from inline code -->
+  <script>
+    const swCode = `
+      const CACHE_NAME = 'lcgame-cache-v1';
+      const assetsToCache = ['./', './index.html'];
+      self.addEventListener('install', event => {
+        event.waitUntil(
+          caches.open(CACHE_NAME).then(cache => cache.addAll(assetsToCache))
+        );
+      });
+      self.addEventListener('fetch', event => {
+        event.respondWith(
+          caches.match(event.request).then(response => response || fetch(event.request))
+        );
+      });
+      self.addEventListener('activate', event => {
+        event.waitUntil(
+          caches.keys().then(keys => Promise.all(
+            keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
+          ))
+        );
+      });
+    `;
+    const swBlob = new Blob([swCode], { type: 'text/javascript' });
+    const swUrl = URL.createObjectURL(swBlob);
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register(swUrl)
+      .then(reg => console.log('Service Worker registered:', reg))
+      .catch(err => console.error('Service Worker registration failed:', err));
+    }
+  </script>
+</head>
+<body>
+  <h1>Lucas and Caleb's Progressive Game!</h1>
+  <div id="scoreBoard">Score: 0</div>
+  <div id="levelDisplay">Level: 1</div>
+  <div id="timer">Time: 30s</div>
+  <div id="gameContainer">
+    <div id="target"></div>
+    <div id="bonusTarget"></div>
+    <div id="gameOverMessage">
+      Game Over!<br />
+      Your score: <span id="finalScore"></span>
+    </div>
+  </div>
+
+  <!-- Game logic -->
+  <script>
+    let score = 0;
+    let timeLeft = 30; // seconds
+    let level = 1;
+    const levelThreshold = 10;
+    const normalTarget = document.getElementById('target');
+    const bonusTarget = document.getElementById('bonusTarget');
+    const scoreBoard = document.getElementById('scoreBoard');
+    const levelDisplay = document.getElementById('levelDisplay');
+    const timerDisplay = document.getElementById('timer');
+    const gameContainer = document.getElementById('gameContainer');
+    const gameOverMessage = document.getElementById('gameOverMessage');
+    const finalScoreDisplay = document.getElementById('finalScore');
+
+    function positionElement(element) {
+      const containerWidth = gameContainer.clientWidth;
+      const containerHeight = gameContainer.clientHeight;
+      const elemSize = element.clientWidth;
+      const maxLeft = containerWidth - elemSize;
+      const maxTop = containerHeight - elemSize;
+      element.style.left = Math.floor(Math.random() * maxLeft) + 'px';
+      element.style.top = Math.floor(Math.random() * maxTop) + 'px';
+    }
+
+    function moveTarget() {
+      positionElement(normalTarget);
+    }
+
+    function spawnBonusTarget() {
+      if (bonusTarget.style.display === 'none' && Math.random() < 0.5) {
+        positionElement(bonusTarget);
+        bonusTarget.style.display = 'block';
+        setTimeout(() => { bonusTarget.style.display = 'none'; }, 3000);
+      }
+    }
+
+    function updateLevel() {
+      const newLevel = Math.floor(score / levelThreshold) + 1;
+      if (newLevel !== level) {
+        level = newLevel;
+        levelDisplay.textContent = 'Level: ' + level;
+      }
+    }
+
+    function updateTimer() {
+      timeLeft--;
+      timerDisplay.textContent = 'Time: ' + timeLeft + 's';
+      if (timeLeft <= 0) {
+        clearInterval(gameTimer);
+        clearInterval(bonusSpawner);
+        endGame();
+      }
+    }
+
+    function endGame() {
+      normalTarget.style.display = 'none';
+      bonusTarget.style.display = 'none';
+      gameOverMessage.style.display = 'block';
+      finalScoreDisplay.textContent = score;
+    }
+
+    normalTarget.addEventListener('click', () => {
+      if (timeLeft > 0) {
+        score++;
+        scoreBoard.textContent = 'Score: ' + score;
+        updateLevel();
+        moveTarget();
+      }
+    });
+
+    bonusTarget.addEventListener('click', () => {
+      if (timeLeft > 0) {
+        score += 5;
+        timeLeft += 3;
+        scoreBoard.textContent = 'Score: ' + score;
+        timerDisplay.textContent = 'Time: ' + timeLeft + 's';
+        updateLevel();
+        bonusTarget.style.display = 'none';
+      }
+    });
+
+    moveTarget();
+    const gameTimer = setInterval(updateTimer, 1000);
+    const bonusSpawner = setInterval(spawnBonusTarget, 5000);
+  </script>
+</body>
+</html>
